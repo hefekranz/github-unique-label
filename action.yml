@@ -1,0 +1,9 @@
+name: unique-label
+description: 'ensures there is only one instance of a label across all Pull Requests'
+inputs:
+  label:
+    description: 'name of the label to keep unique'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
