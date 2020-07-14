@@ -19,7 +19,7 @@ async function run(): Promise<void> {
       .filter(item => github.context.payload.number !== item.number)
       .filter(item => item.labels.map(l => l.name).includes(label))
       .forEach(item =>
-        okto.removeLabel({
+        okto.issues.removeLabel({
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
           issue_number: item.number,

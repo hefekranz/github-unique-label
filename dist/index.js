@@ -2448,7 +2448,7 @@ function run() {
             pulls.data
                 .filter(item => github.context.payload.number !== item.number)
                 .filter(item => item.labels.map(l => l.name).includes(label))
-                .forEach(item => okto.removeLabel({
+                .forEach(item => okto.issues.removeLabel({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 issue_number: item.number,
