@@ -2444,7 +2444,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const label = core.getInput('label', { required: true });
-            const log = new Logger((core.getInput('debug') === "true"));
+            const log = new Logger(core.getInput('debug') === 'true');
             log.debug(`debug is on`);
             const { GITHUB_TOKEN } = process.env;
             if (!GITHUB_TOKEN) {
@@ -2455,7 +2455,8 @@ function run() {
             const okto = github.getOctokit(GITHUB_TOKEN);
             const pulls = yield okto.pulls.list({
                 owner: github.context.repo.owner,
-                repo: github.context.repo.repo
+                repo: github.context.repo.repo,
+                state: "all"
             });
             log.debug(pulls);
             pulls.data

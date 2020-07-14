@@ -27,7 +27,8 @@ async function run(): Promise<void> {
     const okto = github.getOctokit(GITHUB_TOKEN)
     const pulls = await okto.pulls.list({
       owner: github.context.repo.owner,
-      repo: github.context.repo.repo
+      repo: github.context.repo.repo,
+      state: 'all'
     })
     log.debug(pulls)
     pulls.data
