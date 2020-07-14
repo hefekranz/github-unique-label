@@ -4,6 +4,10 @@ inputs:
   label:
     description: 'name of the label to keep unique'
     required: true
+  debug:
+    description: 'adds some logging'
+    required: false
+    default: "false"
 runs:
   using: 'node12'
   main: 'dist/index.js'

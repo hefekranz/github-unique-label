@@ -2430,20 +2430,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const github = __importStar(__webpack_require__(469));
+class Logger {
+    constructor(debug) {
+        this.isDebug = debug;
+    }
+    debug(msg) {
+        if (this.isDebug) {
+            console.log(msg);
+        }
+    }
+}
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const label = core.getInput('label', { required: true });
+            const log = new Logger((core.getInput('debug') === "true"));
+            log.debug(`debug is on`);
             const { GITHUB_TOKEN } = process.env;
             if (!GITHUB_TOKEN) {
                 core.setFailed('GITHUB_TOKEN is required');
                 return;
             }
+            log.debug(`got label ${label}`);
             const okto = github.getOctokit(GITHUB_TOKEN);
             const pulls = yield okto.pulls.list({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo
             });
+            log.debug(pulls);
             pulls.data
                 .filter(item => github.context.payload.number !== item.number)
                 .filter(item => item.labels.map(l => l.name).includes(label))
