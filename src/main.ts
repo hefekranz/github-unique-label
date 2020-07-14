@@ -12,8 +12,7 @@ async function run(): Promise<void> {
     const okto = github.getOctokit(GITHUB_TOKEN)
     const pulls = await okto.pulls.list({
       owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      state: 'open'
+      repo: github.context.repo.repo
     })
     pulls.data
       .filter(item => github.context.payload.number !== item.number)
